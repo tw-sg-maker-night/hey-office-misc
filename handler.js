@@ -1,16 +1,16 @@
 'use strict';
 
-var util = require('util')
-var Lex = require('lex-sdk')
+const util = require('util')
+const Lex = require('lex-sdk')
 
 function inspect(obj) {
   return util.inspect(obj, false, null)
 }
 
-var handlers = {
+const passwordHandlers = {
   'GetPassword': function() {
-    var network = this.event.currentIntent.slots["Network"]
-    var output = this.event.outputDialogMode
+    const network = this.event.currentIntent.slots["Network"]
+    const output = this.event.outputDialogMode
     if(network.indexOf('guest') != -1) {
       if(output == 'Voice') {
         this.emit(':tell', 'The t.w. guest password is: '+process.env.TWGUEST_PASSWORD)
@@ -24,14 +24,18 @@ var handlers = {
         this.emit(':tell', 'The twevent password is: '+process.env.TWEVENT_PASSWORD)
       }
     } else {
-      this.emit(':tell', 'How should I know!?!')
+      this.emit(':tell', 'How should I know?!')
     }
   }
 }
 
-module.exports.getPassword = (event, context, callback) => {
+const getPassword = (event, context, callback) => {
   console.log("Event = " + inspect(event))
-  var lex = Lex.handler(event, context)
-  lex.registerHandlers(handlers)
+  const lex = Lex.handler(event, context)
+  lex.registerHandlers(passwordHandlers)
   lex.execute()
 };
+
+module.exports = {
+  getPassword: getPassword
+}
