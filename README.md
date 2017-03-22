@@ -1,6 +1,6 @@
 # Hey Office - Misc Features
 
-## TWGuest
+## Get Password
 
 Me: What is the twguest password?
 
