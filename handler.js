@@ -42,6 +42,27 @@ const getPassword = (event, context, callback) => {
   lex.execute()
 };
 
+const documentHandlers = {
+  'GetDocument': function() {
+    const documentName = this.event.currentIntent.slots["DocumentName"].toLowerCase();
+    const output = this.event.outputDialogMode
+    if(output == 'Voice') this.emit(':tell', "Message me instead to get the answer!")
+    if(documentName.indexOf('leave form') != -1) {
+      if(output !== 'Voice') {
+        this.emit(':tell', 'https://docs.google.com/a/thoughtworks.com/forms/d/e/1FAIpQLScxeQd78tKd1aw7K2mzKH5QPwZ7XO8N65Bwsqzo27Pchl122Q/viewform')
+      }
+    }
+  }
+}
+
+const getDocument = (event, context, callback) => {
+  console.log("Event = " + inspect(event))
+  const lex = Lex.handler(event, context)
+  lex.registerHandlers(documentHandlers)
+  lex.execute()
+};
+
 module.exports = {
-  getPassword: getPassword
+  getPassword: getPassword,
+  getDocument: getDocument
 }
