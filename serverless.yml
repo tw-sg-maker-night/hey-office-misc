@@ -39,8 +39,9 @@ provider:
 #            - "Ref" : "ServerlessDeploymentBucket"
 
 # you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+  environment:
+    TWGUEST_PASSWORD: ${file(./serverless.env.yml):TWGUEST_PASSWORD}
+    TWEVENT_PASSWORD: ${file(./serverless.env.yml):TWEVENT_PASSWORD}
 
 # you can add packaging information here
 #package:
@@ -52,8 +53,10 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  get_password:
+  get-password:
     handler: handler.getPassword
+  get-document:
+    handler: handler.getDocument
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

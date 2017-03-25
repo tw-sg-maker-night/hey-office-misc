@@ -13,15 +13,15 @@ const passwordHandlers = {
     const output = this.event.outputDialogMode
     if(network.indexOf('guest') != -1) {
       if(output == 'Voice') {
-        this.emit(':tell', 'The t.w. guest password is: '+ process.env.TWGUEST_PASSWORD)
+        this.emit(':tell', 'The t.w. guest password is: ' + process.env.TWGUEST_PASSWORD)
       } else {
-        this.emit(':tell', 'The twguest password is: '+ process.env.TWGUEST_PASSWORD)
+        this.emit(':tell', 'The twguest password is: ' + process.env.TWGUEST_PASSWORD)
       }
     } else if(network.indexOf('event') != -1) {
       if(output == 'Voice') {
-        this.emit(':tell', 'The t.w. event password is: '+ process.env.TWEVENT_PASSWORD)
+        this.emit(':tell', 'The t.w. event password is: ' + process.env.TWEVENT_PASSWORD)
       } else {
-        this.emit(':tell', 'The twevent password is: '+ process.env.TWEVENT_PASSWORD)
+        this.emit(':tell', 'The twevent password is: ' + process.env.TWEVENT_PASSWORD)
       }
     } else if(network.indexOf('data') != -1) {
       if(output == 'Voice') {
