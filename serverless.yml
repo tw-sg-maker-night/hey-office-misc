@@ -42,6 +42,7 @@ provider:
   environment:
     TWGUEST_PASSWORD: ${file(./serverless.env.yml):TWGUEST_PASSWORD}
     TWEVENT_PASSWORD: ${file(./serverless.env.yml):TWEVENT_PASSWORD}
+    LEAVE_FORM_LINK: ${file(./serverless.env.yml):LEAVE_FORM_LINK}
 
 # you can add packaging information here
 #package:

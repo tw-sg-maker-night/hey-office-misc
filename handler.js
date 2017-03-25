@@ -48,10 +48,9 @@ const documentHandlers = {
     const output = this.event.outputDialogMode
     if(output == 'Voice') this.emit(':tell', "Message me instead to get the answer!")
     if(documentName.indexOf('leave form') != -1) {
-      if(output !== 'Voice') {
-        this.emit(':tell', 'https://docs.google.com/a/thoughtworks.com/forms/d/e/1FAIpQLScxeQd78tKd1aw7K2mzKH5QPwZ7XO8N65Bwsqzo27Pchl122Q/viewform')
-      }
+      this.emit(':tell', process.env.LEAVE_FORM_LINK)
     }
+    this.emit(':tell', "Sorry, I can't find the " + documentName);
   }
 }
 
