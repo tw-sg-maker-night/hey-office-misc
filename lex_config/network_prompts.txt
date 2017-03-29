@@ -1,0 +1,3 @@
+What network are you connecting to?
+Which network?
+Which WiFi network?

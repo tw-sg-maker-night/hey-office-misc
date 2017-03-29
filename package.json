@@ -4,11 +4,18 @@
   "description": "## TWGuest",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cucumber": "cucumber.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lex-sdk": "col/lex-sdk"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.34.0",
+    "chai": "^3.5.0",
+    "cucumber": "^2.0.0-rc.7",
+    "nock": "^9.0.10"
   }
 }
