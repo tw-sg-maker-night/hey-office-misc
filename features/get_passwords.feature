@@ -13,3 +13,7 @@ Feature: As a user, I want to quickly figure out what the guest wifi password is
       Then I am prompted for the "network"
       When I say "twguest"
       Then I receive a response that starts with "The twguest password is: "
+
+  Scenario: Get twdata wifi password
+    When I say "What's the twdata wifi password"
+    Then I receive "The twdata is only accessible to TWers, and the password is the same as your okta login password"
