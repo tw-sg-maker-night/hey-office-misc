@@ -58,6 +58,8 @@ functions:
     handler: handler.getPassword
   get-document:
     handler: handler.getDocument
+  end-chat:
+    handler: handler.endChat
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

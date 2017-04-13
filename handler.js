@@ -61,7 +61,22 @@ const getDocument = (event, context, callback) => {
   lex.execute()
 };
 
+const endChatHandler = {
+  'EndChat': function() {
+    const output = this.event.outputDialogMode
+    this.emit(':tell', "See you later!");
+  }
+}
+
+const endChat = (event, context, callback) => {
+  console.log("Event = " + inspect(event))
+  const lex = Lex.handler(event, context)
+  lex.registerHandlers(endChatHandler)
+  lex.execute()
+};
+
 module.exports = {
   getPassword: getPassword,
-  getDocument: getDocument
+  getDocument: getDocument,
+  endChat: endChat
 }
