@@ -19,7 +19,7 @@ service: hey-office-misc
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
   stage: dev
   region: us-east-1
 
@@ -40,9 +40,9 @@ provider:
 
 # you can define service wide environment variables here
   environment:
-    TWGUEST_PASSWORD: ${file(./serverless.env.yml):TWGUEST_PASSWORD}
-    TWEVENT_PASSWORD: ${file(./serverless.env.yml):TWEVENT_PASSWORD}
-    LEAVE_FORM_LINK: ${file(./serverless.env.yml):LEAVE_FORM_LINK}
+    TWGUEST_PASSWORD: ${env:TWGUEST_PASSWORD}
+    TWEVENT_PASSWORD: ${env:TWEVENT_PASSWORD}
+    LEAVE_FORM_LINK: ${env:LEAVE_FORM_LINK}
 
 # you can add packaging information here
 #package:
