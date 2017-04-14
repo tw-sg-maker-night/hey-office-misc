@@ -63,7 +63,7 @@ const getDocument = (event, context, callback) => {
 
 const endChatHandler = {
   'EndChat': function() {
-    this.emit(':tell', '');
+    this.emit(':tell', "Ok. See you later!");
   }
 }
 
