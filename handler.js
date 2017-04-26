@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const util = require('util')
 const Lex = require('lex-sdk')
@@ -7,9 +7,9 @@ function inspect(obj) {
   return util.inspect(obj, false, null)
 }
 
-const passwordHandlers = {
+const handlers = {
   'GetPassword': function() {
-    const network = this.event.currentIntent.slots["Network"]
+    const network = this.event.currentIntent.slots["Network"] || ""
     const output = this.event.outputDialogMode
     if(network.indexOf('guest') != -1) {
       if(output == 'Voice') {
@@ -32,17 +32,7 @@ const passwordHandlers = {
     } else {
       this.emit(':tell', 'How should I know?!')
     }
-  }
-}
-
-const getPassword = (event, context, callback) => {
-  console.log("Event = " + inspect(event))
-  const lex = Lex.handler(event, context)
-  lex.registerHandlers(passwordHandlers)
-  lex.execute()
-};
-
-const documentHandlers = {
+  },
   'GetDocument': function() {
     const documentName = this.event.currentIntent.slots["DocumentName"].toLowerCase();
     const output = this.event.outputDialogMode
@@ -50,32 +40,20 @@ const documentHandlers = {
     if(documentName.indexOf('leave form') != -1) {
       this.emit(':tell', process.env.LEAVE_FORM_LINK)
     }
-    this.emit(':tell', "Sorry, I can't find the " + documentName);
-  }
-}
-
-const getDocument = (event, context, callback) => {
-  console.log("Event = " + inspect(event))
-  const lex = Lex.handler(event, context)
-  lex.registerHandlers(documentHandlers)
-  lex.execute()
-};
-
-const endChatHandler = {
+    this.emit(':tell', "Sorry, I can't find the " + documentName)
+  },
   'EndChat': function() {
-    this.emit(':tell', "Ok. See you later!");
+    this.emit(':tell', "Ok. See you later!")
   }
 }
 
-const endChat = (event, context, callback) => {
+const misc = (event, context, callback) => {
   console.log("Event = " + inspect(event))
   const lex = Lex.handler(event, context)
-  lex.registerHandlers(endChatHandler)
+  lex.registerHandlers(handlers)
   lex.execute()
-};
+}
 
 module.exports = {
-  getPassword: getPassword,
-  getDocument: getDocument,
-  endChat: endChat
+  misc: misc
 }

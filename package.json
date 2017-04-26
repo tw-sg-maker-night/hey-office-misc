@@ -4,7 +4,7 @@
   "description": "## TWGuest",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"no test specified\" && exit 0",
+    "test": "mocha spec/**/**_spec.js",
     "cucumber": "cucumber.js"
   },
   "author": "",
@@ -16,6 +16,7 @@
     "aws-sdk": "^2.34.0",
     "chai": "^3.5.0",
     "cucumber": "^2.0.0-rc.7",
-    "nock": "^9.0.10"
+    "nock": "^9.0.10",
+    "mocha": "^3.2.0"    
   }
 }
