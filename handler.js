@@ -8,6 +8,12 @@ function inspect(obj) {
 }
 
 const handlers = {
+  'ThankYou': function() {
+    this.emit(':tell', "You're welcome")
+  },
+  'Hello': function() {
+    this.emit(':tell', "Hi, How can I help you today?")
+  },
   'GetPassword': function() {
     const network = this.event.currentIntent.slots["Network"] || ""
     const output = this.event.outputDialogMode

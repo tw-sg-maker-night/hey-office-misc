@@ -57,3 +57,18 @@ describe('GetPassword', () => {
   })
 
 })
+
+describe('Hello', () => {
+
+  it('should repond with a greeting', (done) => {
+    event = testEvent('Hello', 'FulfillmentCodeHook', {}, {})
+    handler.misc(event, {
+      succeed: function(response) {
+        expect(response.dialogAction.type).to.equal('Close')
+        expect(response.dialogAction.message.content).to.equal("Hi, How can I help you today?")
+        done()
+      }
+    })
+  })
+
+})
