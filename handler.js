@@ -41,13 +41,17 @@ const handlers = {
     this.emit(':tell', "Sorry, I can't find the " + documentName)
   },
   'EndChat': function() {
+    Object.keys(this.attributes).forEach( (key) => { delete this.attributes[key]; });
     this.emit(':tell', "Ok. See you later!")
   }
 }
 
 const misc = (event, context, callback) => {
   console.log("Event = " + inspect(event))
-  const lex = Lex.handler(event, context)
+  const lex = Lex.handler(event, { succeed: (response) => {
+    console.log("Response = ", inspect(response))
+    context.succeed(response)
+  }})
   lex.registerHandlers(handlers)
   lex.execute()
 }
