@@ -90,7 +90,7 @@ describe('ThankYou', () => {
     event = testEvent('ThankYou', 'FulfillmentCodeHook', {ValueA: 'blah', ValueB: 'Blah2'}, {})
     handler.misc(event, {
       succeed: function(response) {
-        expect(JSON.stringify(response.sessionAttributes)).to.equal(JSON.stringify({}))
+        expect(response.sessionAttributes).to.eql({})
         done()
       }
     })
@@ -115,7 +115,7 @@ describe('EndChat', () => {
     event = testEvent('EndChat', 'FulfillmentCodeHook', {ValueA: 'blah', ValueB: 'Blah2'}, {})
     handler.misc(event, {
       succeed: function(response) {
-        expect(JSON.stringify(response.sessionAttributes)).to.equal(JSON.stringify({}))
+        expect(response.sessionAttributes).to.eql({})
         done()
       }
     })
