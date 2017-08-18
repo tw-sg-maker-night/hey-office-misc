@@ -9,6 +9,7 @@ function inspect(obj) {
 
 const handlers = {
   'ThankYou': function() {
+    Object.keys(this.attributes).forEach( (key) => { delete this.attributes[key]; });
     this.emit(':tell', "You're welcome")
   },
   'Hello': function() {
@@ -17,16 +18,24 @@ const handlers = {
   'GetPassword': function() {
     const network = this.event.currentIntent.slots["Network"] || ""
     const output = this.event.outputDialogMode
-
-    if(network.includes('guest')) {
-      const ssid = (output === 'Voice') ? 't.w. guest' : 'twguest'
-      this.emit(':tell', `The ${ssid} password is: ` + process.env.TWGUEST_PASSWORD)
-    } else if(network.includes('event')) {
-      const ssid = (output === 'Voice') ? 't.w. event' : 'twevent'
-      this.emit(':tell', `The ${ssid} password is: ` + process.env.TWEVENT_PASSWORD)
-    } else if(network.includes('data')) {
-      const ssid = (output === 'Voice') ? 't.w. data' : 'twdata'
-      this.emit(':tell', `The ${ssid} is only accessible to TWers, and the password is the same as your okta login password`)
+    if(network.indexOf('guest') != -1) {
+      if(output == 'Voice') {
+        this.emit(':tell', 'The t.w. guest password is: ' + process.env.TWGUEST_PASSWORD)
+      } else {
+        this.emit(':tell', 'The twguest password is: ' + process.env.TWGUEST_PASSWORD)
+      }
+    } else if(network.indexOf('event') != -1) {
+      if(output == 'Voice') {
+        this.emit(':tell', 'The t.w. event password is: ' + process.env.TWEVENT_PASSWORD)
+      } else {
+        this.emit(':tell', 'The twevent password is: ' + process.env.TWEVENT_PASSWORD)
+      }
+    } else if(network.indexOf('data') != -1) {
+      if(output == 'Voice') {
+        this.emit(':tell', 'The t.w. data is only accessible to TWers, and the password is the same as your okta login password')
+      } else {
+        this.emit(':tell', 'The twdata is only accessible to TWers, and the password is the same as your okta login password')
+      }
     } else {
       this.emit(':tell', 'How should I know?!')
     }

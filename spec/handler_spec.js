@@ -73,6 +73,31 @@ describe('Hello', () => {
 
 })
 
+describe('ThankYou', () => {
+
+  it("should say you're welcome", (done) => {
+    event = testEvent('ThankYou', 'FulfillmentCodeHook', {}, {})
+    handler.misc(event, {
+      succeed: function(response) {
+        expect(response.dialogAction.type).to.equal('Close')
+        expect(response.dialogAction.message.content).to.equal("You're welcome")
+        done()
+      }
+    })
+  })
+
+  it('should clear any session attributes', (done) => {
+    event = testEvent('ThankYou', 'FulfillmentCodeHook', {ValueA: 'blah', ValueB: 'Blah2'}, {})
+    handler.misc(event, {
+      succeed: function(response) {
+        expect(JSON.stringify(response.sessionAttributes)).to.equal(JSON.stringify({}))
+        done()
+      }
+    })
+  })
+
+})
+
 describe('EndChat', () => {
 
   it('should say goodbye', (done) => {
@@ -87,7 +112,7 @@ describe('EndChat', () => {
   })
 
   it('should clear any session attributes', (done) => {
-    event = testEvent('EndChat', 'DialogCodeHook', {ValueA: 'blah', ValueB: 'Blah2'}, {})
+    event = testEvent('EndChat', 'FulfillmentCodeHook', {ValueA: 'blah', ValueB: 'Blah2'}, {})
     handler.misc(event, {
       succeed: function(response) {
         expect(JSON.stringify(response.sessionAttributes)).to.equal(JSON.stringify({}))
