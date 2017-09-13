@@ -52,6 +52,9 @@ const handlers = {
   'EndChat': function() {
     Object.keys(this.attributes).forEach( (key) => { delete this.attributes[key]; });
     this.emit(':tell', "Ok. See you later!")
+  },
+  'DuelRequest': function() {
+    this.emit(':tell', "En Garde!")
   }
 }
 
